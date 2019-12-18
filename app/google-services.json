@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1068331209918",
+    "firebase_url": "https://space307-eventsapp.firebaseio.com",
+    "project_id": "space307-eventsapp",
+    "storage_bucket": "space307-eventsapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068331209918:android:545a5becdffcf99502faef",
+        "android_client_info": {
+          "package_name": "com.space307.events_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1068331209918-mhkum3s384cie0di7psuiq25qmh63svb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALczpdg6Ae-Q44S-A447aVYoWretflTkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1068331209918-mhkum3s384cie0di7psuiq25qmh63svb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
