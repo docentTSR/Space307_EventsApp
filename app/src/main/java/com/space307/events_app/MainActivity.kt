@@ -1,5 +1,6 @@
 package com.space307.events_app
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -56,6 +57,9 @@ class MainActivity : AppCompatActivity() {
 
         adapter.setListener(object : OnEventItemListener {
             override fun onEventSelected(model: EventModel) {
+                var intent = Intent(this@MainActivity, EventCardActivity::class.java)
+                intent.putExtra("selectedEvent", model)
+                startActivity(intent)
             }
 
             override fun onEventRemoved(model: EventModel) {
