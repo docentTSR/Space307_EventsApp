@@ -5,6 +5,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.space307.events_app.utils.getCategoryImage
 import com.space307.events_app.utils.getStringDate
 
 
@@ -22,6 +23,8 @@ class EventCardActivity : AppCompatActivity() {
 
         if (model.logoUrl.isNotEmpty()) {
             //TODO load img from url
+        } else {
+            image.setImageResource(getCategoryImage(EventCategoryType.valueOf(model.category)))
         }
 
         val name: TextView = findViewById(R.id.EventName)
