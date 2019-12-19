@@ -1,23 +1,28 @@
 package com.space307.events_app
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.space307.events_app.providers.DatabaseProvider
 import com.space307.events_app.providers.OnDatabaseQueryListener
 import com.space307.events_app.providers.OnDatabaseUpdateListener
+import com.space307.events_app.utils.EventModelsGenerator
+import com.space307.events_app.utils.getStringDate
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var adapter: EventsAdapter
+    lateinit var dateText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
 
-//        DatabaseProvider.addEvent(EventModelsGenerator.generateEventModel())
+//        DatabaseProvider.addEvent(EventModelsGenerator.generateAntifitnessModel())
+//        DatabaseProvider.addEvent(EventModelsGenerator.generatePokerModel())
 
         initViews()
         fetchData()
@@ -41,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViews() {
         val recyclerView = findViewById<RecyclerView>(R.id.events_recyclerview)
+        dateText = findViewById(R.id.main_activity_date)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -55,12 +61,23 @@ class MainActivity : AppCompatActivity() {
             override fun onEventRemoved(model: EventModel) {
             }
         })
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val position = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                val event = adapter.getModelByPosition(position)
+                dateText.text = getStringDate(event.startDate)
+            }
+        })
     }
 
     private fun fetchData() {
         DatabaseProvider.getEvents(object : OnDatabaseQueryListener<List<EventModel>> {
             override fun onSuccess(queryModel: List<EventModel>) {
-                adapter.setItems(queryModel)
+                var sorted = queryModel.sortedBy { it.startDate }
+                sorted = sorted.filter { it.startDate < System.currentTimeMillis() }
+                adapter.setItems(sorted)
             }
 
             override fun onFailure(e: Throwable) {

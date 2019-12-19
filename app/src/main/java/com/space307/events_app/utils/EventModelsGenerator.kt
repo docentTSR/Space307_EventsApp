@@ -21,4 +21,34 @@ object EventModelsGenerator {
             longitude = 0.0
         )
 
+    fun generateAntifitnessModel() =
+        EventModel(
+            name = "Anti fitness",
+            description = "Групповые тренировки для сотрудников компании. Проходят на Газовой 10",
+            logoUrl = "url",
+            category = EventCategoryType.values()[1].name,
+            startDate = System.currentTimeMillis(),
+            endDate = System.currentTimeMillis() + DateUtils.HOUR_IN_MILLIS,
+            minPersons = 1,
+            maxPersons = 15,
+            latitude = 0.0,
+            longitude = 0.0,
+            repeatable = true
+        )
+
+    fun generatePokerModel() =
+        EventModel(
+            name = "Poker evening",
+            description = "Играем в покер, пьем пивас",
+            logoUrl = "",
+            category = EventCategoryType.values()[0].name,
+            startDate = System.currentTimeMillis(),
+            endDate = System.currentTimeMillis() + DateUtils.HOUR_IN_MILLIS,
+            minPersons = 5,
+            maxPersons = 10,
+            latitude = 0.0,
+            longitude = 0.0,
+            repeatable = false
+        )
+
 }
