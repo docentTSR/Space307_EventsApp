@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD5sLTth5pLs45YQfhHXktRgLd3nDcUFkU",
@@ -17,12 +18,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-db.collection("events")
-    /*.where('repeatable', '==', false).*/.get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-    });
-});
+export { db };
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
