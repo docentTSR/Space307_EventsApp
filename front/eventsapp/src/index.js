@@ -5,7 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from "react-redux";
+import {applyMiddleware, combineReducers, createStore} from 'redux'
+import {itemsReducer} from "./reducers/itemsReducer";
+import thunk from "redux-thunk";
+import logger from 'redux-logger'
+import {loadItems} from "./actions/itemsActions";
 
 const firebaseConfig = {
     apiKey: "AIzaSyD5sLTth5pLs45YQfhHXktRgLd3nDcUFkU",
@@ -20,7 +25,33 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 export { db };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const AppReducer = combineReducers({
+    items: itemsReducer,
+});
+
+const middlewares = [thunk];
+
+const DEV = true;
+
+if (DEV) {
+    middlewares.push(logger)
+}
+
+const store = createStore(AppReducer, applyMiddleware(...middlewares));
+
+loadItems(store.dispatch);
+
+class AppComponent extends React.Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <App />
+            </Provider>
+        )
+    }
+}
+
+ReactDOM.render(<AppComponent />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
