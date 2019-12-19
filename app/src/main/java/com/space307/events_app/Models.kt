@@ -1,5 +1,7 @@
 package com.space307.events_app
 
+import java.io.Serializable
+
 data class EventModel(
     var id: String = "",
 
@@ -24,7 +26,7 @@ data class EventModel(
     var repeatable: Boolean = false,
 
     var repeatableDays: String = ""
-)
+) : Serializable
 
 enum class EventCategoryType {
     GAMES,
