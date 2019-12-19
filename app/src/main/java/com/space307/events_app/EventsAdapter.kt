@@ -37,7 +37,7 @@ class EventsAdapter : RecyclerView.Adapter<EventViewHolder>() {
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
         val eventModel = items[position]
 
-        holder.bindView(eventModel)
+        holder.bindView(eventModel, listener)
     }
 }
 
@@ -48,7 +48,7 @@ class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val categoryIcon: ImageView = itemView.findViewById(R.id.item_event_category_icon)
     private val logo: ImageView = itemView.findViewById(R.id.item_event_image)
 
-    fun bindView(model: EventModel) {
+    fun bindView(model: EventModel, listener : OnEventItemListener?) {
         title.text = model.name
         description.text = model.description
         if (model.logoUrl.isNotEmpty()) {
@@ -62,6 +62,10 @@ class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             categoryIcon.visibility = View.VISIBLE
         } else {
             categoryIcon.visibility = View.GONE
+        }
+
+        itemView.setOnClickListener {
+            listener?.onEventSelected(model)
         }
     }
 
