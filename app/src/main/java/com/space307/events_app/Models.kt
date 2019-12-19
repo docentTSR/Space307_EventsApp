@@ -19,7 +19,11 @@ data class EventModel(
     var latitude: Double = 0.0,
     var longitude: Double = 0.0,
 
-    var viewed: Boolean = false
+    var viewed: Boolean = false,
+
+    var repeatable: Boolean = false,
+
+    var repeatableDays: String = ""
 )
 
 enum class EventCategoryType {

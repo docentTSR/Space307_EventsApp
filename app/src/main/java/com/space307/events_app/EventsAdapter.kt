@@ -3,6 +3,7 @@ package com.space307.events_app
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -22,11 +23,13 @@ class EventsAdapter : RecyclerView.Adapter<EventViewHolder>() {
         this.listener = listener
     }
 
+    fun getModelByPosition(position : Int) : EventModel = items[position]
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder =
         EventViewHolder(
             LayoutInflater
                 .from(parent.context)
-                .inflate(R.layout.event_item, parent, false)
+                .inflate(R.layout.item_event, parent, false)
         )
 
     override fun getItemCount(): Int = items.size
@@ -40,9 +43,31 @@ class EventsAdapter : RecyclerView.Adapter<EventViewHolder>() {
 
 class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private val title: TextView = itemView.findViewById(R.id.event_title)
+    private val title: TextView = itemView.findViewById(R.id.item_event_title)
+    private val description: TextView = itemView.findViewById(R.id.item_event_subtitle)
+    private val categoryIcon: ImageView = itemView.findViewById(R.id.item_event_category_icon)
+    private val logo: ImageView = itemView.findViewById(R.id.item_event_image)
 
     fun bindView(model: EventModel) {
         title.text = model.name
+        description.text = model.description
+        if (model.logoUrl.isNotEmpty()) {
+
+        } else {
+            logo.setImageResource(getCategoryImage(EventCategoryType.valueOf(model.category)))
+        }
+
+        categoryIcon.setImageResource(R.drawable.ic_replay_black_24dp)
+        if (model.repeatable) {
+            categoryIcon.visibility = View.VISIBLE
+        } else {
+            categoryIcon.visibility = View.GONE
+        }
+    }
+
+    private fun getCategoryImage(eventType : EventCategoryType): Int = when(eventType) {
+        EventCategoryType.SPORT -> R.drawable.ic_fitness
+        EventCategoryType.TRAVEL -> R.drawable.ic_travel
+        else -> R.drawable.ic_travel
     }
 }
