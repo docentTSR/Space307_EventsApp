@@ -61,6 +61,7 @@ class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         categoryIcon.setImageResource(R.drawable.ic_replay_black_24dp)
         if (model.repeatable) {
             categoryIcon.visibility = View.VISIBLE
+            categoryIcon.visibility = View.GONE
         } else {
             categoryIcon.visibility = View.GONE
         }

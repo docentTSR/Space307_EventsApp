@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.space307.events_app.providers.DatabaseProvider
 import com.space307.events_app.providers.OnDatabaseQueryListener
 import com.space307.events_app.providers.OnDatabaseUpdateListener
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var adapter: EventsAdapter
     lateinit var dateText: TextView
+    lateinit var fab: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +76,11 @@ class MainActivity : AppCompatActivity() {
                 dateText.text = getStringDate(event.startDate)
             }
         })
+
+        fab = findViewById(R.id.fab)
+        fab.setOnClickListener {
+            startActivity(Intent(this@MainActivity, AddEventActivity::class.java))
+        }
     }
 
     private fun fetchData() {
