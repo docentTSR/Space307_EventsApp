@@ -24,7 +24,7 @@ const useStyles = makeStyles({
         marginBottom: 12,
     },
 });
-export function Row({item}) {
+export function Row({item, onAdd, onRemove, myEvents}) {
     const classes = useStyles();
     var dateStart = new Date(item.startDate);
     var dateEnd = new Date(item.endDate);
@@ -33,6 +33,7 @@ export function Row({item}) {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+    const isIn = myEvents.includes(+item.id);
     return (
         <Card className={classes.card}>
             <CardActionArea onClick={handleExpandClick}>
@@ -54,7 +55,10 @@ export function Row({item}) {
                         {item.description}
                     </Typography>
                     <CardActions style={{justifyContent: 'center'}}>
-                        <Button size="small" color='primary'>I wanna go!</Button>
+                        {isIn ?
+                            <Button size="medium" color="primary" onClick={onRemove}>Выйти</Button> :
+                            <Button size="medium" color="primary" onClick={onAdd}>Я в деле!</Button>
+                        }
                     </CardActions>
                 </CardContent>
             </Collapse>

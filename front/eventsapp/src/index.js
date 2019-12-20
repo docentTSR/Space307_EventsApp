@@ -11,6 +11,10 @@ import {itemsReducer} from "./reducers/itemsReducer";
 import thunk from "redux-thunk";
 import logger from 'redux-logger'
 import {loadItems} from "./actions/itemsActions";
+import {myEventsReducer} from "./reducers/myEventsReducer";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const firebaseConfig = {
     apiKey: "AIzaSyD5sLTth5pLs45YQfhHXktRgLd3nDcUFkU",
@@ -27,7 +31,16 @@ export { db };
 
 const AppReducer = combineReducers({
     items: itemsReducer,
+    myEvents: myEventsReducer,
 });
+
+const persistConfig = {
+    key: 'root',
+    storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, AppReducer)
+
 
 const middlewares = [thunk];
 
@@ -37,7 +50,8 @@ if (DEV) {
     middlewares.push(logger)
 }
 
-const store = createStore(AppReducer, applyMiddleware(...middlewares));
+const store = createStore(persistedReducer, applyMiddleware(...middlewares));
+const persistor = persistStore(store);
 
 loadItems(store.dispatch);
 
@@ -45,7 +59,9 @@ class AppComponent extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <App />
+                <PersistGate loading={null} persistor={persistor}>
+                    <App />
+                </PersistGate>
             </Provider>
         )
     }
