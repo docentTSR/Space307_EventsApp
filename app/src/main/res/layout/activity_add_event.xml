@@ -4,25 +4,36 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <TextView
+        android:id="@+id/activity_add_event_description_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:text="Описание события"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/activity_add_event_title_input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="72dp"
-        android:gravity="bottom"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="20dp"
         app:layout_constraintWidth_default="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/activity_add_event_description_title">
 
         <EditText
             android:id="@+id/activity_add_event_title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Title"
+            android:hint="Name of event"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:inputType="text" />
@@ -34,10 +45,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="72dp"
-        android:gravity="bottom"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintWidth_default="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,6 +63,122 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/activity_add_event_date_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:text="Выбирите дату события"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_event_description_input_layout"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@color/shadow_black"
+        android:text="Повторяющее событие"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_event_date_title"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/activity_add_event_single_event_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_event_date_title"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/activity_add_event_date_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_event_single_event_switch">
+
+        <EditText
+            android:id="@+id/activity_add_event_date_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:inputType="date" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <FrameLayout
+        android:id="@+id/activity_add_event_date_clicker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/activity_add_event_date_input_layout"
+        app:layout_constraintEnd_toEndOf="@id/activity_add_event_date_input_layout"
+        app:layout_constraintTop_toTopOf="@id/activity_add_event_date_input_layout"
+        app:layout_constraintBottom_toBottomOf="@id/activity_add_event_date_input_layout"/>
+
+    <TextView
+        android:id="@+id/activity_add_event_category_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:text="Выбирите категорию события"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_event_date_input_layout"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/activity_add_event_category_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintWidth_default="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_event_category_title">
+
+        <EditText
+            android:id="@+id/activity_add_event_category_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Category"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:inputType="date" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <FrameLayout
+        android:id="@+id/activity_add_event_category_clicker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="@id/activity_add_event_category_input_layout"
+        app:layout_constraintEnd_toEndOf="@id/activity_add_event_category_input_layout"
+        app:layout_constraintTop_toTopOf="@id/activity_add_event_category_input_layout"
+        app:layout_constraintBottom_toBottomOf="@id/activity_add_event_category_input_layout"/>
+
+    <Button
+        android:id="@+id/activity_add_event_btn_create"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:text="Создать событие"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
